@@ -11,8 +11,10 @@ import com.sedmelluq.discord.lavaplayer.track.playback.NonAllocatingAudioFrameBu
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.message.MessageCreateEvent;
+import discord4j.core.event.domain.message.ReactionAddEvent;
 import discord4j.core.object.VoiceState;
 import discord4j.core.object.entity.Member;
+import discord4j.core.object.entity.Message;
 import discord4j.core.object.entity.channel.VoiceChannel;
 import discord4j.voice.AudioProvider;
 
@@ -31,21 +33,24 @@ public class App {
 
 //        /*-----Discord Bot-----*/
         setupMusicPlayer(); //!join and !play
-        final GatewayDiscordClient client = initializeClinet();
+        final GatewayDiscordClient client = initializeClient();
 
         setupCommandMapping(client);
         addCommandPing();   //!ping
         //add "!tl" command
         commands.put("tl", new TranslateCommand());
 
+        //add reaction to trigger translate text
+        client.getEventDispatcher().on(ReactionAddEvent.class)
+                .subscribe(event -> new NonEnglishTextEvent().execute(event));
+
         client.onDisconnect().block();
     }
 
 
-    public static GatewayDiscordClient initializeClinet() {
+    public static GatewayDiscordClient initializeClient() {
         String token = System.getenv("BotToken");
         GatewayDiscordClient client = DiscordClientBuilder.create(token)
-
                 .build()
                 .login()
                 .block();
