@@ -17,6 +17,7 @@ import discord4j.core.object.entity.channel.VoiceChannel;
 import discord4j.voice.AudioProvider;
 
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -27,24 +28,17 @@ public class App {
     private static final Map<String, Command> commands = new HashMap<>();
 
     public static void main(String[] args) {
-        /*-----Google Translate-----*/
-        Translate translate = TranslateOptions.getDefaultInstance().getService();
-        Translation translation = translate.translate("¡Hola Mundo!");
-        System.out.printf("Translated Text:\n\t%s\n", translation.getTranslatedText());
 
-        /*-----Discord Bot-----*/
-//        setupMusicPlayer(); //!join and !play
-//        final GatewayDiscordClient client = initializeClinet();
-//
-//        //TODO: add "!translate" command
-//        commands.put("!translate", new TranslateCommand());
-//
-//        setupCommandMapping(client);
-//        addCommandPing();   //!ping
-//
-//        client.onDisconnect().block();
+//        /*-----Discord Bot-----*/
+        setupMusicPlayer(); //!join and !play
+        final GatewayDiscordClient client = initializeClinet();
 
+        setupCommandMapping(client);
+        addCommandPing();   //!ping
+        //add "!tl" command
+        commands.put("tl", new TranslateCommand());
 
+        client.onDisconnect().block();
     }
 
 
