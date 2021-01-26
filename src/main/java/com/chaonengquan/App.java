@@ -49,8 +49,9 @@ public class App {
 
 
     public static GatewayDiscordClient initializeClinet() {
-        String token = "ODAzMzU3ODgxMjE4NDk4NTgx.YA8nVA.D-GQokHFk6-hXTtNkqODmYKVcOc";
+        String token = System.getenv("BotToken");
         GatewayDiscordClient client = DiscordClientBuilder.create(token)
+
                 .build()
                 .login()
                 .block();
