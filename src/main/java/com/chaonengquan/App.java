@@ -28,21 +28,21 @@ public class App {
 
     public static void main(String[] args) {
         /*-----Google Translate-----*/
-//        Translate translate = TranslateOptions.getDefaultInstance().getService();
-//        Translation translation = translate.translate("¡Hola Mundo!");
-//        System.out.printf("Translated Text:\n\t%s\n", translation.getTranslatedText());
+        Translate translate = TranslateOptions.getDefaultInstance().getService();
+        Translation translation = translate.translate("¡Hola Mundo!");
+        System.out.printf("Translated Text:\n\t%s\n", translation.getTranslatedText());
 
         /*-----Discord Bot-----*/
-        setupMusicPlayer(); //!join and !play
-        final GatewayDiscordClient client = initializeClinet();
-
-        //TODO: add "!translate" command
-        commands.put("!translate", new TranslateCommand());
-
-        setupCommandMapping(client);
-        addCommandPing();   //!ping
-
-        client.onDisconnect().block();
+//        setupMusicPlayer(); //!join and !play
+//        final GatewayDiscordClient client = initializeClinet();
+//
+//        //TODO: add "!translate" command
+//        commands.put("!translate", new TranslateCommand());
+//
+//        setupCommandMapping(client);
+//        addCommandPing();   //!ping
+//
+//        client.onDisconnect().block();
 
 
     }
